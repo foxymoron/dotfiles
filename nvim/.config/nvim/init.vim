@@ -6,11 +6,18 @@ Plug 'Yggdroot/indentLine'
 Plug 'tpope/vim-fugitive'
 Plug 'jiangmiao/auto-pairs'
 Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-surround'
+Plug 'scrooloose/nerdcommenter'
 " snippets
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets' 
 " themes
 Plug 'mhartington/oceanic-next'
+Plug 'vim-scripts/wombat256.vim'
+Plug 'dikiaap/minimalist'
+Plug 'dylanaraps/crayon'
+Plug 'chriskempson/base16-vim'
+Plug 'bitterjug/vim-colors-bitterjug'
 Plug 'Zenburn'
 " deoplete
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -20,9 +27,6 @@ Plug 'zchee/deoplete-jedi'
 " airline
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-" js
-Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx'] }
-Plug 'mxw/vim-jsx', { 'for': ['javascript', 'javascript.jsx'] }
 " fuzzy finder
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
@@ -30,6 +34,9 @@ Plug 'junegunn/fzf.vim'
 Plug 'gregsexton/MatchTag', { 'for': ['html', 'xml'] }
 Plug 'tpope/vim-markdown', { 'for': ['markdown'] }
 Plug 'othree/javascript-libraries-syntax.vim', { 'for': ['javascript', 'coffee', 'ls', 'typescript'] }
+Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx'] }
+Plug 'mxw/vim-jsx', { 'for': ['javascript', 'javascript.jsx'] }
+Plug 'alvan/vim-closetag', { 'for': ['html', 'xml', 'javascript'] }
 " neomake
 Plug 'neomake/neomake'
 call plug#end()
@@ -52,6 +59,9 @@ set listchars=tab:│\ ,trail:•,extends:❯,precedes:❮
 set shiftround
 let &showbreak='↪'
 
+" buffers
+set hidden
+
 "faster redrawing
 set ttyfast
 
@@ -65,9 +75,11 @@ set colorcolumn=80
 set autoindent
 set smartindent
 set expandtab 
+
 " syntax and colourscheme
 set background=dark
-colorscheme OceanicNext
+let base16colorspace=256
+colorscheme base16-default-dark
 
 " NERDTree
 let g:NERDTreeQuitOnOpen=0
@@ -79,7 +91,7 @@ let g:airline#extensions#tabline#enabled=1
 let g:airline#extensions#tabline#buffer_idx_mode=1
 let g:airline#extensions#tabline#fnamemod=':t'
 let g:airline_powerline_fonts=1
-let g:airline_theme='base16'
+let g:airline_theme='base16_default'
 
 " deoplete
 let g:deoplete#enable_at_startup=1
@@ -117,9 +129,6 @@ let g:fzf_colors = {
   \ 'spinner': ['fg', 'Label'],
   \ 'header':  ['fg', 'Comment'] }
 let g:fzf_buffers_jump = 1
-nnoremap <leader>o :Files<CR>
-nnoremap <leader>b :Buffers<CR>
-nnoremap <leader>t :Tags<CR>
 
 " vim jsx
 let g:jsx_ext_required = 0
@@ -136,3 +145,16 @@ let g:gitgutter_eager=0
 
 " shortcuts
 nnoremap <leader><tab> <C-^>
+nnoremap <leader>f :Files<CR>
+nnoremap <leader>pf :GFiles<CR>
+nnoremap <leader>b :Buffers<CR>
+nnoremap <leader>t :BTags<CR>
+nnoremap <leader>pt :Tags<CR>
+
+" neomake
+let g:neomake_python_enabled_makers = ['flake8']
+autocmd! BufWritePost * Neomake
+
+" nerdcommenter
+let g:NERDTrimTrailingWhitespace=1
+let g:NERDCommentEmptyLines=1
