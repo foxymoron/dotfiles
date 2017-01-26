@@ -37,9 +37,11 @@ markup=none
 # The first parameter sets the step (and units to display)
 # The second parameter overrides the mixer selection
 # See the script for details.
+
 [volume]
 #label=VOL
-label=♪
+label=
+separator=false
 instance=Master
 #instance=PCM
 interval=5
