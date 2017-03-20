@@ -1,2 +1,3 @@
 [options]
-font = FuraMonoForPowerline Nerd Font 11
+font = FuraMonoForPowerline Nerd Font 9
+dynamic_title = true
