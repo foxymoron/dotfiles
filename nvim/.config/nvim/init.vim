@@ -9,10 +9,15 @@ Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-surround'
 Plug 'scrooloose/nerdcommenter'
 Plug 'jiangmiao/auto-pairs'
+Plug 'sheerun/vim-polyglot', { 'do': 'build' }
+Plug 'ludovicchabant/vim-gutentags'
+Plug 'mhinz/vim-startify' " fzf
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 " snippets
 Plug 'Shougo/neosnippet'
 Plug 'Shougo/neosnippet-snippets'
-Plug 'honza/vim-snippets' 
+Plug 'honza/vim-snippets'
 " themes
 Plug 'chriskempson/base16-vim'
 " airline
@@ -20,11 +25,15 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 " neomake
 Plug 'neomake/neomake'
-" erlang
-Plug 'vim-erlang/vim-erlang-runtime'
 " deoplete
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'tweekmonster/deoplete-clang'
+Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
+" frontend
+Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
+" latex
+Plug 'lervag/vimtex'
 call plug#end()
 
 " filetype
@@ -62,7 +71,7 @@ set wildmenu
 " search
 set incsearch
 set hlsearch
-nnoremap <F4> :nohlsearch<CR>
+nnoremap <F3> :nohlsearch<CR>
 
 " folds
 set foldenable
@@ -81,17 +90,9 @@ nnoremap <Right> <NOP>
 " indent
 set autoindent
 set smartindent
-set expandtab 
-au FileType html setl sw=2 sts=2 ts=2
-au FileType css setl sw=2 sts=2 ts=2
-au FileType javascript setl sw=2 sts=2 ts=2
-au FileType javascript.jsx setl sw=2 sts=2 ts=2
-au FileType json setl sw=2 sts=2 ts=2
-au FileType python setl ts=4 sw=4 sts=4 fdm=indent
-au FileType c setl noet sw=4 ts=4 sts=4
-au FileType cpp setl noet sw=4 ts=4 sts=4
-au FileType d setl sw=4 ts=4 sts=4
-au FileType sh setl sw=2 sts=2 ts=2
+set expandtab
+au FileType vim setl sw=2 sts=2 ts=2
+au FileType tex setl sw=4 sts=4 ts=4
 
 " syntax and colourscheme
 set background=dark
@@ -143,6 +144,11 @@ let g:deoplete#enable_smart_case = 1
 " deoplete-clang
 let g:deoplete#sources#clang#libclang_path='/usr/lib/libclang.so'
 let g:deoplete#sources#clang#clang_header='/usr/include/clang'
+let g:deoplete#sources#clang#flags = ['-std=c++11']
+" deoplete-tern
+let g:tern_request_timeout = 1
+let g:tern_show_signature_in_pum = '0'
+let g:tern#filetypes = ['jsx', 'javascript.jsx']
 
 inoremap <silent><expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 inoremap <silent><expr><s-tab> pumvisible() ? "\<c-p>" : "\<s-tab>"
@@ -151,6 +157,49 @@ inoremap <silent><expr><s-tab> pumvisible() ? "\<c-p>" : "\<s-tab>"
 let g:neosnippet#enable_snipmate_compatibility = 1
 let g:neosnippet#snippets_directory='~/.vim/plugged/vim-snippets/snippets'
 
-imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-xmap <C-k>     <Plug>(neosnippet_expand_target)
+imap <C-k>  <Plug>(neosnippet_expand_or_jump)
+smap <C-k>  <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>  <Plug>(neosnippet_expand_target)
+
+" vim-jsx
+let g:jsx_ext_required = 0
+
+" fzf
+let g:fzf_buffers_jump = 1
+let g:fzf_tags_command = 'ctags -R'
+" fzf ag embellishments
+command! -bang -nargs=* Ag
+  \ call fzf#vim#ag(<q-args>,
+  \   <bang>0 ? fzf#vim#with_preview('up:60%')
+  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \ <bang>0)
+" fzf shortcuts
+nnoremap <leader>ff :Files<CR>
+nnoremap <leader>gf :GFiles<CR>
+nnoremap <leader>b :Buffers<CR>
+nnoremap <leader>t :BTags<CR>
+nnoremap <leader>gt :Tags<CR>
+nnoremap <leader><leader> :Ag<CR>
+
+" vimtex
+let g:vimtex_view_method = 'zathura'
+
+" neomake
+let g:neomake_javascript_enabled_makers = ['eslint']
+let g:neomake_cpp_enabled_makers = ['clang']
+let g:neomake_cpp_clang_args = ['-std=c++11', '-Wextra', '-Wall']
+autocmd! BufWritePost * Neomake
+
+" startify
+let g:startify_session_dir = '~/.vim/session'
+let g:startify_list_order = ['sessions', 'files', 'dir']
+
+" local vimrc
+set exrc
+set secure
+
+" make
+nnoremap <F4> :make!<CR>
+
+" mouse
+set mouse=a

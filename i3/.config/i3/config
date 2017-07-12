@@ -60,8 +60,11 @@ bindsym $mod+p focus parent
 # focus the child container
 bindsym $mod+o focus child
 
+# window borders
+new_window pixel 1
+
 # workspaces
-set $ws1 "1"
+set $ws1 "1"
 set $ws2 "2b"
 set $ws3 "3c"
 set $ws4 "4d"
@@ -69,7 +72,7 @@ set $ws5 "5e"
 set $ws6 "6f"
 set $ws7 "7g"
 set $ws8 "8h"
-set $ws9 "9"
+set $ws9 "9"
 set $ws10 "10"
 
 # switch to workspace
@@ -99,11 +102,11 @@ bindsym $mod+Shift+0 move container to workspace $ws10
 # assign to workspaces
 assign [class="^Spotify$"] $ws10
 for_window [class="^Spotify$"] move to workspace $ws10
-for_window [class="^Thunderbird$"] move to workspace $ws9
+for_window [class="^Zotero$"] move to workspace $ws9
 for_window [class="^Galculator$"] floating enable
 for_window [instance="scratchpad"] move window to scratchpad
-for_window [class="^Firefox$"] title_format " <span></span>  %title"
-for_window [class="^Termite$"] title_format " <span></span>  %title"
+for_window [class="^Firefox$"] title_format " <span></span>  %title"
+for_window [class="^Termite$"] title_format " <span></span>  %title"
 for_window [class="^Chromium$"] title_format " <span></span>  %title"
 
 bindsym $mod+minus scratchpad show
@@ -164,10 +167,11 @@ bindsym $mod+Ctrl+Shift+l exec i3lock-fancy
 
 exec --no-startup-id compton --config /home/jait/.config/compton.conf -CGb
 exec --no-startup-id redshift-gtk
-exec --no-startup-id keepassx2 -name scratchpad
+exec --no-startup-id keepassxc -name scratchpad
 exec --no-startup-id nm-applet
 exec --no-startup-id spotify
-exec --no-startup-id thunderbird
+exec --no-startup-id zotero
+exec --no-startup-id syncthing-gtk
 exec --no-startup-id dunst -config /home/jait/.config/dunst/config
 
 exec --no-startup-id setxkbmap -option compose:ralt

@@ -1,16 +1,9 @@
-# borrowed from github.com/ivyl/zsh-config
-
-# ls
-alias l='ls -lFh'
-alias la='ls -lAFh'
-
 # editors
 alias e='nvim'
-alias vim='nvim'
-alias vi='nvim'
+alias vi='vim'
 
 # screenchange
-alias hdmi='screenchange -1 HDMI1 -2 LVDS1 -m'
-alias vga='screenchange -1 VGA1 -2 LVDS1 -m'
+alias hdmi='screenchange -1 HDMI-1 -2 LVDS-1 -m'
+alias vga='screenchange -1 VGA-1 -2 LVDS-1 -m'
 alias reset='xrandr --auto'
-alias monitor-off='xrandr --output VGA1 --off;xrandr --output HDMI1 --off'
+alias monitor-off='xrandr --output VGA-1 --off;xrandr --output HDMI-1 --off'
