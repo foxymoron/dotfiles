@@ -60,7 +60,13 @@ nnoremap <Right> <NOP>
 set autoindent
 set smartindent
 set expandtab
+set sw=4
+set sts=4
+set ts=4
 au FileType vim setl sw=2 sts=2 ts=2
+au FileType javascript setl sw=2 sts=2 ts=2
+au FileType javascript.jsx setl sw=2 sts=2 ts=2
+au FileType cpp setl sw=2 sts=2 ts=2
 
 " NERDTree
 let g:NERDTreeQuitOnOpen=0
@@ -119,6 +125,7 @@ set mouse=a
 
 " completor
 let g:completor_clang_binary = '/usr/bin/clang'
+let g:completor_node_binary = '/usr/bin/node'
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <expr> <CR> pumvisible() ? "\<C-y>\<CR>" : "\<CR>"
@@ -147,3 +154,10 @@ call minpac#add('maralla/completor.vim')
 " minpac shortcuts
 command! PacUpdate call minpac#update()
 command! PacClean call minpac#clean()
+
+" fix path for fzf
+set runtimepath^=~/.fzf
+runtime plugin/fzf.vim
+
+" formatting
+autocmd FileType c, cpp setlocal equalprg=clang-format

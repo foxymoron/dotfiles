@@ -4,6 +4,13 @@ source "${HOME}/.zgen/zgen.zsh"
 # if init script doesn't exist
 if ! zgen saved; then
     # prezto
+    zgen prezto syntax-highlighting color 'yes'
+    zgen prezto terminal auto-title 'yes'
+    zgen prezto editor key-bindings 'vi'
+    zgen prezto '*:*' color 'yes'
+    zgen prezto ssh identities 'id_rsa'
+    zgen prezto editor dot-expansion 'yes'
+
     zgen prezto
     zgen prezto git
     zgen prezto command-not-found
@@ -15,12 +22,8 @@ if ! zgen saved; then
     zgen prezto pacman
     zgen prezto utility
     zgen prezto node
-    zgen prezto syntax-highlighting color 'yes'
-    zgen prezto node:nvm auto-switch 'yes'
-    zgen prezto terminal auto-title 'yes'
-    zgen prezto pacman frontend 'yaourt'
-    zgen prezto editor key-bindings 'vi'
-    zgen prezto '*:*' color 'yes'
+    zgen prezto gpg
+
 
     # additional plugins
     zgen load zsh-users/zsh-autosuggestions
@@ -34,6 +37,9 @@ if ! zgen saved; then
 
     zgen save
 fi
+
+# load .zprofile
+source $HOME/.zprofile
 
 # load additional zsh configuration
 ZSH_CONFIG_DIR="$HOME/.config/zsh"
@@ -54,16 +60,18 @@ export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig/
 # load virtualenvwrapper
 source /usr/bin/virtualenvwrapper.sh
 
-# load ssh-keys
-# TODO: use gpg for handling keys
-eval $(keychain --eval --quiet --confhost)
-
 # load fzf
 export FZF_DEFAULT_COMMAND='ag -g ""'
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-# path
-export PATH=$PATH:/usr/lib/erlang/man:$(ruby -e 'print Gem.user_dir')/bin:/home/jait/dev/bin/:$HOME/.cargo/bin
-
 # editor
 export EDITOR=nvim
+
+# keymap
+setxkbmap -option compose:ralt
+setxkbmap -option caps:escape
+
+# load z
+source ~/dev/z/z.sh
+
+export MATLAB_JAVA=/usr/lib/jvm/java-7-openjdk/jre

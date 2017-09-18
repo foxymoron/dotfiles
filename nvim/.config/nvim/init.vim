@@ -1,3 +1,7 @@
+" python
+let g:python_host_prog = '/home/jait/.virtualenvs/neovim2/bin/python'
+let g:python3_host_prog = '/home/jait/.virtualenvs/neovim3/bin/python'
+
 call plug#begin('~/.vim/plugged')
 " basics
 Plug 'majutsushi/tagbar'
@@ -186,6 +190,8 @@ let g:vimtex_view_method = 'zathura'
 
 " neomake
 let g:neomake_javascript_enabled_makers = ['eslint']
+let g:neomake_jsx_enabled_makers = ['eslint']
+let g:neomake_javascript_eslint_exe = $PWD .'/node_modules/.bin/eslint'
 let g:neomake_cpp_enabled_makers = ['clang']
 let g:neomake_cpp_clang_args = ['-std=c++11', '-Wextra', '-Wall']
 autocmd! BufWritePost * Neomake
@@ -203,3 +209,4 @@ nnoremap <F4> :make!<CR>
 
 " mouse
 set mouse=a
+

@@ -12,4 +12,4 @@ rofi.separator-style:                solid
 rofi.lines: 7
 rofi.width: 30
 rofi.terminal: termite
-rofi.font: FuraMonoForPowerline Nerd Font 10
+rofi.font: FuraMono Nerd Font Mono 10

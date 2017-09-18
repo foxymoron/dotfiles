@@ -2,7 +2,7 @@ set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:FuraMonoForPowerline Nerd Font 8
+font pango:Inconsolata For Powerline 8
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -16,6 +16,9 @@ bindsym $mod+Shift+q kill
 # rofi
 bindsym $mod+Tab exec --no-startup-id "rofi -show window"
 bindsym $mod+d exec --no-startup-id "rofi -show run -modi run,drun,ssh"
+
+# teiler
+bindsym $mod+q exec --no-startup-id "teiler"
 
 # change focus
 bindsym $mod+j focus left
@@ -135,7 +138,7 @@ bindsym $mod+r mode "resize"
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-    font pango: Inconsolata for Powerline, FontAwesome 9
+    font pango: Inconsolata For Powerline, FontAwesome 9
     position bottom
     workspace_buttons yes
     status_command i3blocks
@@ -159,13 +162,12 @@ bar {
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5%
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5%
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle
-bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 10
-bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 10
+bindsym XF86MonBrightnessUp exec --no-startup-id light -A 10
+bindsym XF86MonBrightnessDown exec --no-startup-id light -U 10
 bindsym XF86KbdBrightnessUp exec --no-startup-id kb-light.py +
 bindsym XF86KbdBrightnessDown exec --no-startup-id kb-light.py -
 bindsym $mod+Ctrl+Shift+l exec i3lock-fancy
 
-exec --no-startup-id compton --config /home/jait/.config/compton.conf -CGb
 exec --no-startup-id redshift-gtk
 exec --no-startup-id keepassxc -name scratchpad
 exec --no-startup-id nm-applet
@@ -173,6 +175,4 @@ exec --no-startup-id spotify
 exec --no-startup-id zotero
 exec --no-startup-id syncthing-gtk
 exec --no-startup-id dunst -config /home/jait/.config/dunst/config
-
-exec --no-startup-id setxkbmap -option compose:ralt
-exec --no-startup-id setxkbmap -option caps:escape
+exec --no-startup-id termite -d ~/tasks
